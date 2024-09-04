@@ -17,6 +17,64 @@
             width: 150px;
         }
     </style>
+
+    <script>
+        var list, nextId;
+
+        function addItem(){
+            var item = $('#new-item').val();
+            var priority = $('#new-priority').val()
+            var id = nextId++;
+
+            //Adds a row in the todo list tabel
+
+            list[id] = {item: item, priority: priority};
+            saveList();
+
+        }
+
+        function addItemRow(id, item, priority){
+
+        }
+
+        function removeItem(){
+
+        }
+
+        function editItem(){
+
+        }
+
+        //Saves list and nextId to localStorage
+        function saveList(){
+            localStorage.list = JSON.stringify(list);
+            localStorage.nextId = nextId;
+        }
+
+        //Loads stored to do list data from localStorage or sets if first load
+        function loadList(){
+            if(nextId === undefined){
+                nextId = 0
+                list = {}
+            } else {
+                nextId = parseInt(localStorage.nextId);
+                list = JSON.parse(localStorage.list)
+            }
+        }
+
+        //Main
+        $(document).ready(function(){
+            //Listeners
+            $(document).on('click', '#add-item', addItem);
+            //Add edit listener
+            //Add save changes listener
+            //Add remove listener
+
+            loadList();
+
+        });
+
+    </script>
 </head>
 <body>
     <h1>Tododles</h1>
@@ -25,14 +83,14 @@
         <tr>
             <th class="item-col">New Item</th>
             <th class="priority-col">Priority</th>
-            <th class="category-col">Category</th>
+            <!-- <th class="category-col">Category</th> -->
             <th></th>
         </tr>
         <tr>
             <td><input type="text" id="new-item"/></td>
             <td><input type="number" id="new-priority"/></td>
-            <td><input type="text" id="new-category"></td>
-            <td><button>Add</button></td>
+            <!-- <td><input type="text" id="new-category"></td> -->
+            <td><button id="add-item">Add</button></td>
         </tr>
     </table>
 
@@ -40,28 +98,28 @@
         <tr>
             <th class="item-col">Item</th>
             <th class="priority-col">Priority</th>
-            <th class="category-col">Category</th>
+            <!-- <th class="category-col">Category</th> -->
             <th></th>
         </tr>
 
         <tr>
             <td>Do Homework</td>
             <td>3</td>
-            <td>Work</td>
+            <!-- <td>Work</td> -->
             <td><button class="remove-item">X</button></td>
         </tr>
 
         <tr>
             <td>Catch up with friends</td>
             <td>2</td>
-            <td>Friends</td>
+            <!-- <td>Friends</td> -->
             <td><button class="remove-item">X</button></td>
         </tr>
 
         <tr>
             <td>Call mom</td>
             <td>1</td>
-            <td>Family</td>
+            <!-- <td>Family</td> -->
             <td><button class="remove-item">X</button></td>
         </tr>
     </table>
