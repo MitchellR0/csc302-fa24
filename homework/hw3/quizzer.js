@@ -11,19 +11,9 @@ $(document).ready(function(){
     // TODO: handle quiz check
     $(document).on('click', '#check-quiz', checkQuiz);
 
-    //Load list in the main
+    // Load the questions from local storage.
     loadList();
 });
-
-//Adding load function
-function loadList(){
-    if (localStorage.save === undefined){
-        questions = []
-    } else {
-        questions = JSON.parse(localStorage.save)
-        populateQuiz(questions);
-    }
-}
 
 /**
  * Saves the quiz questions from the admin panel, updates the quiz panel.
@@ -40,8 +30,7 @@ function saveQuiz(){
 
     // Save quiz.
     // TODO HW2
-    //This should simply do it? Just saves the questions using localStorage with the key save.
-    localStorage.save = JSON.stringify(questions);
+    localStorage.setItem('questions', JSON.stringify(questions));
 
     // Update quiz panel.
     populateQuiz(questions);
@@ -65,7 +54,7 @@ function populateQuiz(questions){
 }
 
 /**
- * Re-populates the quiz admin with the given questions and answers.
+ * Re-populates the quiz admin panel with the given questions and answers.
  * 
  * @param questions A list of question/answer pairs (each item is an object
  *                  with the fields 'question' and 'answer').
@@ -74,12 +63,13 @@ function populateQuizAdmin(questions){
     var $quiz = $('#quiz-admin-questions')
     $quiz.html('');
 
-    // for(var i = 0; i < questions.length; i++){
-    //     $quiz.append(<tr><td><textarea rows="2" class="question"></textarea></td>'+
-    //     '<td><textarea rows="2" class="answer"></textarea></td>'+
-    //     '<td><button class="remove-question">Delete</button></td></tr>');
-    // }
+    for(var i = 0; i < questions.length; i++){
+        $quiz.append(`<tr><td><textarea rows="2" class="question">${questions[i].question}</textarea></td>`+
+            `<td><textarea rows="2" class="answer">${questions[i].answer}</textarea></td>`+
+            '<td><button class="remove-question">Delete</button></td></tr>');
+    }
 }
+
 
 /**
  * Adds a new row to the quiz admin question editor table.
@@ -122,4 +112,16 @@ function checkQuiz(){
         }
     });
     $('#score').html(`Score: ${correct}/${questions.length} = ${correct/questions.length}`);
+}
+
+/**
+ * Loads the questions from local storage if there are any.
+ */
+function loadList(){
+    //if(localStorage.getItem('questions') !== null){ <-- this will trigger if there is a key called 'questions' in the local storage, even if the value is blank
+    if(localStorage.getItem('questions')){ // <-- this will trigger if there is a key called 'questions' in the local storage, and the value isn't undefined, null, or blank; we could add better safety checks here (make sure it's an array and formatted as we want it to).
+        questions = JSON.parse(localStorage.getItem('questions'));
+        populateQuiz(questions);
+        populateQuizAdmin(questions);
+    }
 }
