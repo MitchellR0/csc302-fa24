@@ -10,10 +10,32 @@ $(document).ready(function(){
     $(document).on('click', '#reset-quiz', saveQuiz);
     // TODO: handle quiz check
     $(document).on('click', '#check-quiz', checkQuiz);
+    $(document).on('click', '#switch-view', switchView)
+
+    $(window).on('hashchange', updateViews);
 
     // Load the questions from local storage.
+    updateViews();
     loadList();
 });
+
+function switchView(){
+    var id = window.location.hash.match(/^#?([^?]*)/)[1];
+    if (id === "admin"){
+        window.location.hash = "quiz";
+    } else {
+        window.location.hash = "admin";
+    }
+}
+
+function updateViews(){
+    var id = window.location.hash.match(/^#?([^?]*)/)[1];
+    if (id === "admin"){
+        $('body').removeClass('quiz-panel-view').addClass('quiz-admin-panel-view');
+    } else {
+        $('body').addClass('quiz-panel-view').removeClass('quiz-admin-panel-view');
+    }
+}
 
 /**
  * Saves the quiz questions from the admin panel, updates the quiz panel.

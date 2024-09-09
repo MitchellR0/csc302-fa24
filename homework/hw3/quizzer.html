@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<!-- 
+CheckList
+
+Multiple Views: 
+Add Button to switch between views: 
+-->
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,17 +27,26 @@
             background-color: rgba(11, 161, 11, 0.172);
         }
 
-        .panel {
+        .quiz-panel, .quiz-admin-panel {
             border: 1px solid black;
             padding: 1em;
             padding-top: 0;
             margin-bottom: 0.5em;
         }
+
+        body.quiz-panel-view .quiz-admin-panel,
+        body.quiz-admin-panel-view .quiz-panel {
+            display: none
+        }
+
     </style>
 </head>
 <body>
     <h1>Quizzer</h1>
-    <div id="quiz-panel" class="panel">
+
+    <h3><button id="switch-view">Switch View</button></h3>
+
+    <div id="quiz-panel" class="quiz-panel">
         <h2>Quiz</h2>
         <span id="score"></span>
         <ol id="quiz">
@@ -40,7 +57,7 @@
         <button id="reset-quiz">Reset</button>
     </div>
 
-    <div id="quiz-admin-panel" class="panel">
+    <div id="quiz-admin-panel" class="quiz-admin-panel">
         <h2>Quiz Admin</h2>
         <table id="quiz-admin-questions">
             <tr>
