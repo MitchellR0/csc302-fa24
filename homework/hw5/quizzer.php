@@ -16,47 +16,11 @@
     <title>Quizzer</title>
 
     <!-- TODO: add styles. -->
-    <style>
-        .incorrect {
-            background-color: rgba(161, 11, 11, 0.172);
-        }
-
-        .correct {
-            background-color: rgba(11, 161, 11, 0.172);
-        }
-
-        .panel {
-            border: 1px solid black;
-            padding: 1em;
-            padding-top: 0;
-            margin-bottom: 0.5em;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .toggle-link {
-            margin-bottom: 1em;
-            display: inline-block;
-            cursor: pointer;
-            color: blue;
-            text-decoration: underline;
-        }
-
-        body.quizzer .quizzer-admin {
-            display: none;
-        }
-
-        body.quizzer-admin .quizzer {
-            display: none;
-        }
-
-    </style>
+    <link href='style.css' rel='stylesheet'>
 </head>
 <body class="quizzer">
     <h1>Quizzer</h1>
-    <a href="#" class="quizzer-admin">Switch to Quizzer</a>
+    <!-- <a href="#" class="quizzer-admin">Switch to Quizzer</a> -->
     <a href="#admin" class="quizzer">Switch to Quizzer Admin</a>
 
     <div id="quiz-panel" class="panel quizzer">
@@ -74,7 +38,7 @@
         <button id="reset-quiz">Reset</button>
     </div>
 
-    <div id="quiz-admin-panel" class="panel quizzer-admin">
+    <!-- <div id="quiz-admin-panel" class="panel quizzer-admin">
         <h2>Quiz Admin</h2>
         <table id="quiz-admin-questions">
             <tr>
@@ -84,7 +48,7 @@
             </tr>
         </table>
         <button id="add-question">Add question</button>
-        <button id="save-quiz">Save</button>
+        <button id="save-quiz">Save</button> -->
     </div>
 
     <footer>
