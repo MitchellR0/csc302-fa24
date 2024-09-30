@@ -4,16 +4,17 @@
     $fullListCSV = [];
 
     foreach ($fullList as $line){
-        array_push($fullListCSV, str_getcsv($line));
+        $fullListCSV[] = str_getcsv($line);
     }
 
     $n = $_GET['n'];
     
     $quotes = [];
     for($i = 1; $i <= $n; $i++){
+        $randomQuote = random_int(0, count($fullListCSV));
         $quotes[] = [
-            'author' => $fullListCSV[$i][0],
-            'quote' => $fullListCSV[$i][1]
+            'author' => $fullListCSV[$randomQuote][0],
+            'quote' => $fullListCSV[$randomQuote][1]
         ];
     }
 

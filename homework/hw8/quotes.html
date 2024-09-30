@@ -13,13 +13,29 @@
 
         function populateQuotes(){
             var quoteNum = $('#quoteNum').val();
+            $("#quoteSection").html("");
 
             $.ajax({
                 url: 'quotes.php',
-                method: 'get',
+                method: 'GET',
                 data: {n: quoteNum},
+                dataType: 'json',
                 success: function(data){
-                    quoteObject = JSON.parse(data);
+                    //Check data here
+                    console.log(data);
+
+                    data.forEach(function (item){
+                        $("#quoteSection").append(
+                        `<p>
+                            ${item.quote}   -${item.author}
+                        </p>`
+                        );
+                    });
+
+                    // for(let i = 0; i < quoteNum; i++){
+
+                    // }
+                    
                 },
                 error: function(jqXHR, textStatus, errorThrown){
                 }
