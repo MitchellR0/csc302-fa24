@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Quote Getter</title>
+    <script>
+        $(document).ready(function(){
+            $(document).on('click', '#quoteBtn', populateQuotes);
+        });
+
+        function populateQuotes(){
+            var quoteNum = $('#quoteNum').val();
+
+            $.ajax({
+                url: 'quotes.php',
+                method: 'get',
+                data: {n: quoteNum},
+                success: function(data){
+                    quoteObject = JSON.parse(data);
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                }
+            });
+        }
+    </script>
+
+</head>
+<body>
+    <h1>Quote Getter</h1>
+    <h3>HW8: AJAX</h3>
+
+    <button id="quoteBtn">Get Quotes</button>
+    <input id="quoteNum" type="number" min="0">
+
+    <div id="quoteSection">
+        <!-- quote section goes here -->
+    </div>
+</body>
+</html>
