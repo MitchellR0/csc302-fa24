@@ -186,8 +186,11 @@ function signup($uri, $matches, $data){
     }
 }
 
-function signIn(){
-
+function isSignedIn(){
+    // I think this is where i need to be adding code?
+    $jwt = str_replace("Bearer ", "", $_SERVER['HTTP_AUTHENTICATION']);
+    $jwtData = verifyJWT($jwt, $SECRET);
+    return $jwtData['verified'] && !isExpired($jwtData);
 }
 
 
